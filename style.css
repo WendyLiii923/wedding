@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  background: radial-gradient(circle at top, #1f3b2c, #0f1a14);
+}
+
+/* 標題動畫 */
+.title {
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.subtitle {
+  opacity: 0;
+  color: #cfe9dc;
+  animation: fadeIn 1.2s ease 0.4s forwards;
+}
+
+/* 淡入 */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 柔光 */
+.glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: rgba(120, 255, 200, 0.08);
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: floatGlow 6s ease-in-out infinite;
+}
+
+@keyframes floatGlow {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* 光點 */
+.particles span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(200,255,220,0.8);
+  border-radius: 50%;
+  animation: float 6s infinite ease-in-out;
+}
+
+.particles span:nth-child(1) { left: 20%; top: 70%; animation-delay: 0s; }
+.particles span:nth-child(2) { left: 40%; top: 80%; animation-delay: 1s; }
+.particles span:nth-child(3) { left: 60%; top: 75%; animation-delay: 2s; }
+.particles span:nth-child(4) { left: 70%; top: 85%; animation-delay: 3s; }
+.particles span:nth-child(5) { left: 50%; top: 65%; animation-delay: 4s; }
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-60px); opacity: 0; }
+}
