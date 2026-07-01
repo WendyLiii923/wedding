@@ -1,71 +1,314 @@
+html,
 body {
   margin: 0;
-  font-family: "Noto Sans TC", sans-serif;
-}
-
-/* HERO */
-.hero {
-  height: 100vh;
-  position: relative;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-
-  background: radial-gradient(circle at top, #1f3b2c, #0f1a14);
+  font-family: 'Kiwi Maru', serif;
 }
 
-/* 標題動畫 */
-.title {
-  opacity: 0;
-  animation: fadeIn 1.2s ease forwards;
+canvas {
+  z-index: 1;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
 }
 
-.subtitle {
-  opacity: 0;
-  color: #cfe9dc;
-  animation: fadeIn 1.2s ease 0.4s forwards;
+/* ===========================
+   背景
+=========================== */
+
+.bg {
+  z-index: 0;
+  position: absolute;
+  inset: 0;
+  background: url('../assets/img/bg_flower_meadow_test.webp') center center;
+  background-size: cover;
 }
 
-/* 淡入 */
-@keyframes fadeIn {
-  to {
+/* ===========================
+   霧氣
+=========================== */
+
+.mist {
+  z-index: 2;
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0.15)
+  );
+
+  animation: breath 3s ease-in-out infinite;
+}
+
+@keyframes breath {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
-/* 柔光 */
-.glow {
+/* ===========================
+   光球
+=========================== */
+
+.orb {
+  z-index: 3;
   position: absolute;
-  width: 400px;
-  height: 400px;
-  background: rgba(120, 255, 200, 0.08);
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  filter: blur(60px);
-  animation: floatGlow 6s ease-in-out infinite;
+  background: rgba(255, 255, 255, 0.25);
+  filter: blur(40px);
+
+  animation: float 4s ease-in-out infinite;
 }
 
-@keyframes floatGlow {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+.orb1 {
+  top: 18%;
+  left: 12%;
 }
 
-/* 光點 */
-.particles span {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: rgba(200,255,220,0.8);
-  border-radius: 50%;
-  animation: float 6s infinite ease-in-out;
+.orb2 {
+  bottom: 18%;
+  right: 18%;
+  animation-delay: 0.8s;
 }
 
-.particles span:nth-child(1) { left: 20%; top: 70%; animation-delay: 0s; }
-.particles span:nth-child(2) { left: 40%; top: 80%; animation-delay: 1s; }
-.particles span:nth-child(3) { left: 60%; top: 75%; animation-delay: 2s; }
-.particles span:nth-child(4) { left: 70%; top: 85%; animation-delay: 3s; }
-.particles span:nth-child(5) { left: 50%; top: 65%; animation-delay: 4s; }
+.orb3 {
+  top: 40%;
+  right: 10%;
+  animation-delay: 1.5s;
+}
 
 @keyframes float {
-  0% { transform: translateY(0); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-60px); opacity: 0; }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+/* ===========================
+   任務文字
+=========================== */
+
+.quest-text {
+  z-index: 5;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  animation: introText 3s forwards;
+}
+
+@keyframes introText {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.92);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+}
+
+/* ===========================
+   標題
+=========================== */
+
+.quest-title-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+}
+
+.quest-title {
+  color: #fff;
+
+  font-size: clamp(38px, 5vw, 68px);
+
+  letter-spacing: 0.15em;
+
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 56px);
+  letter-spacing: 0.08em;
+
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.2);
+}
+
+/* ===========================
+   葉子
+=========================== */
+
+/* .leaf {
+  width: 38px;
+
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.55));
+
+  animation: leafFloat 2.8s ease-in-out infinite;
+}
+
+.leaf.right {
+  animation-delay: 0.4s;
+}
+
+@keyframes leafFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(4deg);
+  }
+} */
+
+/* ===========================
+   底下裝飾
+=========================== */
+
+.mission-decoration {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.mission-line {
+  width: 220px;
+  opacity: 0.85;
+  animation: lineBreath 3s ease-in-out infinite;
+}
+
+.mission-diamond {
+  width: 42px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+  animation: diamondPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes lineBreath {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scaleX(0.95);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes diamondPulse {
+  0%,
+  100% {
+    transform: scale(0.9);
+
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+  }
+
+  50% {
+    transform: scale(1.12);
+
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+  }
+}
+
+/* ===========================
+   花瓣（之後開）
+=========================== */
+
+/*
+.petal{
+
+  position:absolute;
+
+  top:-30px;
+
+  width:18px;
+  height:18px;
+
+  background:url("../assets/img/petal.webp") center/contain no-repeat;
+
+  animation:fall linear infinite;
+
+}
+
+@keyframes fall{
+
+  from{
+
+    transform:
+      translateY(0)
+      rotate(0deg);
+
+  }
+
+  to{
+
+    transform:
+      translateY(110vh)
+      translateX(60px)
+      rotate(360deg);
+
+  }
+
+}
+*/
+
+/* ===========================
+   音樂
+=========================== */
+
+#musicBtn {
+  z-index: 10;
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  width: 50px;
+  height: 50px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.8);
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+#musicBtn:hover {
+  transform: scale(1.08);
 }
